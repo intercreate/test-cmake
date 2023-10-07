@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # An example hook script to verify what is about to be committed.
 # Called by "git commit" with no arguments.  The hook should
@@ -18,8 +18,7 @@ fi
 # If you want to allow non-ASCII filenames set this variable to true.
 allownonascii=$(git config --type=bool hooks.allownonascii)
 
-# Redirect output to stderr.
-exec 1>&2
+set -eo pipefail
 
 # Cross platform projects tend to avoid non-ASCII filenames; prevent
 # them from being added to the repository. We exploit the fact that the
@@ -47,15 +46,9 @@ fi
 
 # If there are whitespace errors, print the offending file names and fail.
 git diff-index --check --cached $against
-if [ "$?" -ne 0 ]
-then
-    exit "$?"
-fi
 
 # Configure and run the tests/examples
-cmake -B build
-if [ "$?" -ne 0 ]
-then
-    exit "$?"
-fi
+cmake -B .build-githook
 
+# Create the package
+cmake --build .build-githook --target package
