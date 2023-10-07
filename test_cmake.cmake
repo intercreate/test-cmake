@@ -52,7 +52,7 @@ endmacrO()
 #
 macro(test_cmake_end)
     list(LENGTH _test_cmake_result_failed_groups _test_cmake_result_failed_groups_count)
-    
+
     message(NOTICE     "")
     message(NOTICE     "┌─ Test CMake Summary")
     message(NOTICE     "├──── ${_test_cmake_result_groups_count} test group(s) run")
@@ -69,7 +69,7 @@ macro(test_cmake_end)
         message(NOTICE "└─✅ All tests passed! 🎉")
         message(NOTICE "")
     endif()
-    
+
 endmacro()
 
 # Declares the beginning of a group of assert statements.
@@ -100,7 +100,7 @@ macro(test_cmake_group_begin name)
             message(FATAL_ERROR "test_group_begin() called twice without test_cmake_group_end()")
         endif()
     endforeach()
-    
+
     set(_test_cmake_group_name ${name})
     set(_test_cmake_group_asserts_failed 0)
     set(_test_cmake_group_asserts 0)
@@ -116,7 +116,7 @@ endmacro()
 # Declares the end of a group of assert statements.
 #
 # For example, if each .cmake file is a series of assertions that makes up a
-# single test case, and each file begins with a call to test_group_begin, then 
+# single test case, and each file begins with a call to test_group_begin, then
 # this would be called at the end of each file.
 #
 # Usage:
@@ -190,7 +190,7 @@ function(assert)
             math(EXPR fail_count "${_test_cmake_group_asserts_failed} + 1")
             set(_test_cmake_group_asserts_failed ${fail_count} PARENT_SCOPE)
         endif()
-        
+
         message(NOTICE "${assert_prefix}❌ Assert: ${print_condition}")
         foreach(val ${condition})  # expand variables if possible
             if(DEFINED "${val}")
