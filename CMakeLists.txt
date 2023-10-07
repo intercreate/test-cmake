@@ -17,7 +17,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     add_custom_command(
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.zip
         COMMAND ${CMAKE_COMMAND} -E tar
-            c ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.zip 
+            c ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.zip
             --format=zip
             -- ${package_files}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
